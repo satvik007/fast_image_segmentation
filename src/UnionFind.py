@@ -8,7 +8,6 @@ class UnionFind:
         self.parent = np.arange(n)
         self.rank = np.zeros(n, dtype=np.int32)
         self.csize = np.ones(n, dtype=np.int32)
-        self.min_edge = np.zeros(n)
 
     def find(self, u):
         v = u
@@ -27,11 +26,9 @@ class UnionFind:
             if self.rank[u] < self.rank[v]:
                 self.parent[u] = v
                 self.csize[v] += self.csize[u]
-                self.min_edge[v] = min(self.min_edge[v], self.min_edge[u])
             else:
                 self.parent[v] = u
                 self.csize[u] += self.csize[v]
-                self.min_edge[u] = min(self.min_edge[u], self.min_edge[v])
                 if self.rank[u] == self.rank[v]:
                     self.rank[u] += 1
 
